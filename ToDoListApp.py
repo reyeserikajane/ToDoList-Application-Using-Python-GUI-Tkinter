@@ -11,6 +11,8 @@ root.resizable(False,False)
 
 task_list = []
 
+
+
 # Application Icon
 image_icon = PhotoImage(file="images/todolisticon.png")
 root.iconphoto(False,image_icon)
