@@ -3,36 +3,59 @@
 
 import tkinter
 from tkinter import *
+import tkinter.messagebox
 
 root = Tk()
 root.title("To-Do-List")
 root.geometry("400x650+400+100")
 root.resizable(False,False)
 
-task_list = []
 def addTask():
     task = todo_entry.get()
-    todo_entry.delete(0, END)
+    if task != "":
+        todolist_container.insert(tkinter.END, task)
+        todo_entry.delete(0, tkinter.END)
+    else:
+        tkinter.messagebox.showwarning(title="Warning!", message="You must enter a task.")
 
-    if task:
-        with open("tasklist.txt", "a") as taskfile:
-            taskfile.write(f"\{task}")
-        task_list.append(task)
-        todolist_container.insert(END, task)
 
-def openTaskFile():
-    try:
-        global task_list
-        with open("tasklist.txt","r") as taskfile:
-            tasks = taskfile.readlines()
+# task_list = []
 
-            for task in tasks:
-                if task != "\n":
-                    task_list.append(task)
-                    todolist_container.insert(END, task)
-    except:
-        file = open("tasklist.txt","r")
-        file.close()
+# def addTask():
+#     task = todo_entry.get()
+#     todo_entry.delete(0, END)
+
+#     if task:
+#         with open("tasklist.txt", "a") as taskfile:
+#             taskfile.write(f"\{task}")
+#         task_list.append(task)
+#         todolist_container.insert( END, task)
+
+# def deleteTask():
+#     global task_list
+#     task = todolist_container.get(ANCHOR)
+#     if (task) in todolist_container:
+#         task_list.remove(task)
+#         with open("tasklist.txt","w") as taskfile:
+#             for task in task_list:
+#                 taskfile.write(task+"\n")
+        
+#         todolist_container.delete( ANCHOR)
+
+
+# def openTaskFile():
+#     try:
+#         global task_list
+#         with open("tasklist.txt","r") as taskfile:
+#             tasks = taskfile.readlines()
+
+#             for task in tasks:
+#                 if task != "\n":
+#                     task_list.append(task)
+#                     todolist_container.insert(END, task)
+#     except:
+#         file = open("tasklist.txt","r")
+#         file.close()
 
 # Application Icon
 image_icon = PhotoImage(file="images/todolisticon.png")
@@ -72,11 +95,9 @@ scrollbar.pack(side=RIGHT, fill=BOTH)
 todolist_container.config(yscrollcommand=scrollbar.set)
 scrollbar.config(command=todolist_container.yview)
 
-openTaskFile()
-
 # Delete task
 delete_icon = PhotoImage(file="images/delete.png")
-Button(root, image=delete_icon, bd=0, command=deleteTask).pack(side=BOTTOM, pady=20)
+Button(root, image=delete_icon, bd=0).pack(side=BOTTOM, pady=20)
 
 
 root.mainloop()
