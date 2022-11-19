@@ -4,6 +4,7 @@
 import tkinter
 from tkinter import *
 import tkinter.messagebox
+import pickle
 
 root = Tk()
 root.title("To-Do-List")
@@ -18,6 +19,15 @@ def addTask():
     else:
         tkinter.messagebox.showwarning(title="Warning!", message="You must enter a task.")
 
+def deleteTask():
+    try:
+        task_index = todolist_container.curselection()[0]
+        todolist_container.delete(task_index)
+    except:
+        tkinter.messagebox.showwarning(title="Warning!", message="You must select a task.")
+
+def save_tasks():
+    tasks = todolist_container
 
 # task_list = []
 
@@ -97,7 +107,7 @@ scrollbar.config(command=todolist_container.yview)
 
 # Delete task
 delete_icon = PhotoImage(file="images/delete.png")
-Button(root, image=delete_icon, bd=0).pack(side=BOTTOM, pady=20)
+Button(root, image=delete_icon, bd=0, command=deleteTask).pack(side=BOTTOM, pady=20)
 
 
 root.mainloop()
