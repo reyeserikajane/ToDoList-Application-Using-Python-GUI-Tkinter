@@ -26,46 +26,12 @@ def deleteTask():
     except:
         tkinter.messagebox.showwarning(title="Warning!", message="You must select a task.")
 
-def save_tasks():
-    tasks = todolist_container
+def saveTasks():
+    tasks = todolist_container.get(0, todolist_container.size())
+    pickle.dump(tasks, open("tasks.dat", "wb"))
 
-# task_list = []
-
-# def addTask():
-#     task = todo_entry.get()
-#     todo_entry.delete(0, END)
-
-#     if task:
-#         with open("tasklist.txt", "a") as taskfile:
-#             taskfile.write(f"\{task}")
-#         task_list.append(task)
-#         todolist_container.insert( END, task)
-
-# def deleteTask():
-#     global task_list
-#     task = todolist_container.get(ANCHOR)
-#     if (task) in todolist_container:
-#         task_list.remove(task)
-#         with open("tasklist.txt","w") as taskfile:
-#             for task in task_list:
-#                 taskfile.write(task+"\n")
-        
-#         todolist_container.delete( ANCHOR)
-
-
-# def openTaskFile():
-#     try:
-#         global task_list
-#         with open("tasklist.txt","r") as taskfile:
-#             tasks = taskfile.readlines()
-
-#             for task in tasks:
-#                 if task != "\n":
-#                     task_list.append(task)
-#                     todolist_container.insert(END, task)
-#     except:
-#         file = open("tasklist.txt","r")
-#         file.close()
+def loadTasks():
+    pass
 
 # Application Icon
 image_icon = PhotoImage(file="images/todolisticon.png")
@@ -81,7 +47,7 @@ set_topimg = Label(root, image=top_img).place(x=20,y=10)
 heading = Label(root, text="MY TO-DO LIST", font="arial 18 bold", fg="black", bg="#C7A15B")
 heading.place(x=115,y=35)
 
-# Add task
+# Add task 
 frame = Frame(root, width=400, height=50, bg="white")
 frame.place(x=0, y=180)
 
@@ -105,9 +71,17 @@ scrollbar.pack(side=RIGHT, fill=BOTH)
 todolist_container.config(yscrollcommand=scrollbar.set)
 scrollbar.config(command=todolist_container.yview)
 
-# Delete task
+# Delete task icon
 delete_icon = PhotoImage(file="images/delete.png")
-Button(root, image=delete_icon, bd=0, command=deleteTask).pack(side=BOTTOM, pady=20)
+Button(root, image=delete_icon, bd=0, command=deleteTask).place(x=120, y=560)
+
+# Save task icon
+save_icon = PhotoImage(file="images/save.png")
+Button(root, image=save_icon, bd=0, command=saveTasks).place(x=180, y=560)
+
+# Load task icon
+load_icon = PhotoImage(file="images/load.png")
+Button(root, image=load_icon, bd=0, command=loadTasks).place(x=240, y=560)
 
 
 root.mainloop()
