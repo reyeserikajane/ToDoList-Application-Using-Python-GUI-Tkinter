@@ -29,6 +29,8 @@ def deleteTask():
 def saveTasks():
     tasks = todolist_container.get(0, todolist_container.size())
     pickle.dump(tasks, open("tasks.dat", "wb"))
+    tkinter.messagebox.showinfo(title="Saved!", message="Tasks entered are now saved.")
+
 
 def loadTasks():
     try:
@@ -65,7 +67,7 @@ todo_entry.place(x=10, y=7)
 todo_entry.focus()
 
 add_button_fnt = ("Comic Sans MS", 20, "bold")
-add_button = Button(frame, text="Add", width=6, bg="#9F516D", fg="black", bd=0, command=addTask)
+add_button = Button(frame, text="Add", width=6, bg="#9F516D", fg="white", bd=0, command=addTask)
 add_button.place(x=300, y=-7)
 add_button.configure(font=add_button_fnt)
 
@@ -73,7 +75,7 @@ add_button.configure(font=add_button_fnt)
 frame1 = Frame(root, bd=1, width=700, height=280,bg="#E4A1B9")
 frame1.pack(pady=(240,0))
 
-todolist_container = Listbox(frame1, font=('Comic Sans Ms',15), width=40,height=10,bg="#E4A1B9",fg="pink", cursor="hand2", selectbackground="black")
+todolist_container = Listbox(frame1, font=('Comic Sans Ms',15,"bold"), width=30,height=10,bg="#E4A1B9",fg="black", cursor="hand2", selectbackground="#9F516D")
 todolist_container.pack(side=LEFT, fill=BOTH, padx=2)
 
 
