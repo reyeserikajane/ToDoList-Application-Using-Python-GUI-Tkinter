@@ -48,8 +48,10 @@ scrollbar.pack(side=RIGHT, fill=BOTH)
 
 todolist_container.config(yscrollcommand=scrollbar.set)
 scrollbar.config(command=todolist_container.yview)
-# Delete task
 
+# Delete task
+delete_icon = PhotoImage(file="images/delete.png")
+Button(root, image=delete_icon, bd=0).pack(side=BOTTOM, pady=20)
 
 
 root.mainloop()
