@@ -31,7 +31,14 @@ def saveTasks():
     pickle.dump(tasks, open("tasks.dat", "wb"))
 
 def loadTasks():
-    pass
+    try:
+        tasks = pickle.load(open("tasks.dat", "rb"))
+        todolist_container.delete(0, tkinter.END)
+        for task in tasks:
+            todolist_container.insert(tkinter.END, task)
+    except:
+        tkinter.messagebox.showwarning(title="Warning!", message="No tasks saved.")
+
 
 # Application Icon
 image_icon = PhotoImage(file="images/todolisticon.png")
