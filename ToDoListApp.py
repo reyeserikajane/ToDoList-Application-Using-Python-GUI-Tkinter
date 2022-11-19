@@ -41,7 +41,6 @@ def loadTasks():
     except:
         tkinter.messagebox.showwarning(title="Warning!", message="No tasks saved.")
 
-
 # Application Icon
 image_icon = PhotoImage(file="images/todolisticon.png")
 root.iconphoto(False,image_icon)
